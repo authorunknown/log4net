@@ -16,6 +16,7 @@
 // limitations under the License.
 //
 #endregion
+// modified in fork git://github.com/authorunknown/log4net.git
 
 using System;
 using System.Text;
@@ -207,6 +208,12 @@ namespace log4net.ObjectRenderer
 				return;
 			}
 
+            if (obj is Exception)
+            {
+                RenderException(rendererMap, (Exception)obj, writer);
+                return;
+            }
+
 			string str = obj.ToString();
 			writer.Write( (str==null) ? SystemInfo.NullText : str );
 		}
@@ -305,6 +312,49 @@ namespace log4net.ObjectRenderer
 			rendererMap.FindAndRender(entry.Key, writer);
 			writer.Write("=");
 			rendererMap.FindAndRender(entry.Value, writer);
-		}	
+		}
+
+        /// <summary>
+        /// Renders detailed exception information which includes full type name, message, and inner exception details
+        /// </summary>
+        private void RenderException(RendererMap rendererMap, Exception ex, TextWriter writer)
+        {
+            while (ex != null)
+            {
+                writer.Write(ex.GetType().FullName);
+                writer.Write(':');
+                writer.Write(' ');
+                writer.Write(ex.Message);
+                writer.WriteLine();
+
+                writer.Write(ex.StackTrace);
+                writer.WriteLine();
+
+#if !NET_1_0 && !NET_1_1 && !MONO_1_0 && !NET_CF
+                IDictionary data = ex.Data;
+                if (data != null && data.Count > 0)
+                {
+                    writer.Write("  Exception Context:");
+                    writer.WriteLine();
+                    foreach (object key in data.Keys)
+                    {
+                        writer.Write(' ');
+                        writer.Write(' ');
+                        writer.Write(' ');
+                        writer.Write(' ');
+                        writer.Write(key.ToString());
+                        writer.Write(':');
+                        writer.Write('=');
+                        object value = data[key];
+                        writer.Write((data[key] ?? (object)"<null>").ToString());
+                        writer.WriteLine();
+                    }
+                }
+#endif
+                if (ex.InnerException != null)
+                    writer.WriteLine("--INNER EXCEPTION");
+                ex = ex.InnerException;
+            }
+        }
 	}
 }
