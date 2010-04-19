@@ -2,3 +2,5 @@
 bin/
 obj/
 *.suo
+src/log4net.xml
+tests/lib/net/
