@@ -319,41 +319,39 @@ namespace log4net.ObjectRenderer
         /// </summary>
         private void RenderException(RendererMap rendererMap, Exception ex, TextWriter writer)
         {
-            while (ex != null)
-            {
-                writer.Write(ex.GetType().FullName);
-                writer.Write(':');
-                writer.Write(' ');
-                writer.Write(ex.Message);
-                writer.WriteLine();
+            writer.Write(ex.GetType().FullName);
+            writer.Write(':');
+            writer.Write(' ');
+            writer.Write(ex.Message);
+            writer.WriteLine();
 
-                writer.Write(ex.StackTrace);
-                writer.WriteLine();
+            writer.Write(ex.StackTrace);
+            writer.WriteLine();
 
 #if !NET_1_0 && !NET_1_1 && !MONO_1_0 && !NET_CF
-                IDictionary data = ex.Data;
-                if (data != null && data.Count > 0)
+            IDictionary data = ex.Data;
+            if (data != null && data.Count > 0)
+            {
+                writer.Write("  Exception Context:");
+                writer.WriteLine();
+                foreach (object key in data.Keys)
                 {
-                    writer.Write("  Exception Context:");
+                    writer.Write(' ');
+                    writer.Write(' ');
+                    writer.Write(' ');
+                    writer.Write(' ');
+                    writer.Write(key.ToString());
+                    writer.Write(':');
+                    writer.Write('=');
+                    rendererMap.FindAndRender(data[key], writer);
                     writer.WriteLine();
-                    foreach (object key in data.Keys)
-                    {
-                        writer.Write(' ');
-                        writer.Write(' ');
-                        writer.Write(' ');
-                        writer.Write(' ');
-                        writer.Write(key.ToString());
-                        writer.Write(':');
-                        writer.Write('=');
-                        object value = data[key];
-                        writer.Write((data[key] ?? (object)"<null>").ToString());
-                        writer.WriteLine();
-                    }
                 }
+            }
 #endif
-                if (ex.InnerException != null)
-                    writer.WriteLine("--INNER EXCEPTION");
-                ex = ex.InnerException;
+            if (ex.InnerException != null)
+            {
+                writer.WriteLine("--INNER EXCEPTION");
+                rendererMap.FindAndRender(ex.InnerException, writer);
             }
         }
 	}
