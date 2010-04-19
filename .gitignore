@@ -1,3 +1,4 @@
-[Bb]in/
-[Oo]bj/
 *.user
+bin/
+obj/
+*.suo
