@@ -1,0 +1,43 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{07010D46-8922-4764-831A-F4D3562D719B}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.cmd = ..\build.cmd
+		..\doap_log4net.rdf = ..\doap_log4net.rdf
+		..\KEYS.txt = ..\KEYS.txt
+		..\LICENSE = ..\LICENSE
+		..\log4net-sdk.ndoc = ..\log4net-sdk.ndoc
+		..\log4net.build = ..\log4net.build
+		..\log4net.include = ..\log4net.include
+		..\NOTICE = ..\NOTICE
+		..\pom.xml = ..\pom.xml
+		..\README.txt = ..\README.txt
+		..\STATUS.txt = ..\STATUS.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "log4net.vs2010", "log4net.vs2010.csproj", "{A9461FDE-B07B-423E-BAF3-723B171B7DCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "log4net.Tests.vs2010", "..\tests\src\log4net.Tests.vs2010.csproj", "{D49FFDC2-3BA6-4DB5-88E0-1048401BCAB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9461FDE-B07B-423E-BAF3-723B171B7DCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9461FDE-B07B-423E-BAF3-723B171B7DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9461FDE-B07B-423E-BAF3-723B171B7DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9461FDE-B07B-423E-BAF3-723B171B7DCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D49FFDC2-3BA6-4DB5-88E0-1048401BCAB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D49FFDC2-3BA6-4DB5-88E0-1048401BCAB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D49FFDC2-3BA6-4DB5-88E0-1048401BCAB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D49FFDC2-3BA6-4DB5-88E0-1048401BCAB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
+		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
+	EndGlobalSection
+EndGlobal

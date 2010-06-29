@@ -728,8 +728,11 @@ namespace log4net.Config
 #elif NET_2_0
 					// Allow the DTD to specify entity includes
 					XmlReaderSettings settings = new XmlReaderSettings();
+#if NET_4_0
+                    settings.DtdProcessing = DtdProcessing.Ignore;
+#else
 					settings.ProhibitDtd = false;
-
+#endif //NET_4_0
 					// Create a reader over the input stream
 					XmlReader xmlReader = XmlReader.Create(configStream, settings);
 #else

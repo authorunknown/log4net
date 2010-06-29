@@ -460,7 +460,11 @@ namespace log4net.Appender
                 }
                 if (!String.IsNullOrEmpty(m_replyTo))
                 {
+#if NET_4_0
+                    mailMessage.ReplyToList.Add(new MailAddress(m_replyTo));
+#else
                     mailMessage.ReplyTo = new MailAddress(m_replyTo);
+#endif
                 }
                 mailMessage.Subject = m_subject;
                 mailMessage.Priority = m_mailPriority;
