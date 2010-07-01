@@ -26,6 +26,10 @@ using System.Runtime.CompilerServices;
 //
 [assembly: System.Runtime.InteropServices.ComVisible(false)]
 #endif
+#if NET_4_0
+[assembly: System.Security.SecurityRules(System.Security.SecurityRuleSet.Level1)]
+#endif
+
 
 //
 // log4net is CLS compliant
@@ -83,7 +87,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration("Retail")]
 #endif
 
-[assembly: AssemblyDescription("Fork: The Apache Software Foundation log4net Logging Framework @ git://github.com/authorunknown/log4net.git")]
+[assembly: AssemblyDescription("Fork of The Apache Software Foundation log4net Logging Framework @ git://github.com/authorunknown/log4net.git")]
 [assembly: AssemblyProduct("log4net")]
 [assembly: AssemblyDefaultAlias("log4net")]
 [assembly: AssemblyCulture("")]		

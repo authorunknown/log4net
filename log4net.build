@@ -753,10 +753,8 @@ limitations under the License.
         </if>
       </if>
     </if>
-    <echo message="${log4net.keyfile}"/>
     <if test="${not temp.build.skip}">
-      <csc if="${current.build.config.release}"
-           keyfile="${log4net.keyfile}"
+      <csc keyfile="${log4net.keyfile}"
            nostdlib="true"
            noconfig="true"
            warnaserror="true"
@@ -770,13 +768,6 @@ limitations under the License.
           <warning number="1058" />
           <warning number="1734"/>
         </nowarn>
-        <sources basedir="${log4net.basedir}/src">
-          <include name="**/*.cs" />
-        </sources>
-        <resources failonempty="true">
-          <include name="${log4net.basedir}/NOTICE" />
-          <include name="${log4net.basedir}/LICENSE" />
-        </resources>
         <references>
           <include name="mscorlib.dll" />
           <include name="System.dll" />
@@ -787,6 +778,13 @@ limitations under the License.
           <!-- allow for third party assemblies to be referenced by just storing them in the lib/<framework family>/<framework version>/<build configuration> directory -->
           <include name="lib/${framework::get-family(framework::get-target-framework())}/${framework::get-version(framework::get-target-framework())}/${current.build.config}/*.dll" />
         </references>
+        <resources failonempty="true">
+          <include name="${log4net.basedir}/NOTICE" />
+          <include name="${log4net.basedir}/LICENSE" />
+        </resources>
+        <sources basedir="${log4net.basedir}/src">
+          <include name="**/*.cs" />
+        </sources>
       </csc>
     </if>
   </target>
