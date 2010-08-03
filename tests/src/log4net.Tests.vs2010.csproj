@@ -188,6 +188,7 @@
     <Compile Include="Util\SystemInfoTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Util\TypeToLoggerNameConverterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\log4net.vs2010.csproj">

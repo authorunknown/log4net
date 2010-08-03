@@ -424,7 +424,7 @@ namespace log4net.Core
 			{
 				throw new ArgumentNullException("type");
 			}
-			return RepositorySelector.GetRepository(repository).GetLogger(type.FullName);
+            return RepositorySelector.GetRepository(repository).GetLogger(TypeToLoggerNameConverter.GetLoggerName(type));
 		}
 
 		/// <summary>
@@ -448,7 +448,7 @@ namespace log4net.Core
 			{
 				throw new ArgumentNullException("type");
 			}
-			return RepositorySelector.GetRepository(repositoryAssembly).GetLogger(type.FullName);
+            return RepositorySelector.GetRepository(repositoryAssembly).GetLogger(TypeToLoggerNameConverter.GetLoggerName(type));
 		}	
 
 		/// <summary>

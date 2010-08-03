@@ -22,6 +22,7 @@ using System.Reflection;
 
 using log4net.Core;
 using log4net.Repository;
+using log4net.Util;
 
 namespace log4net
 {
@@ -252,7 +253,7 @@ namespace log4net
 		/// <returns>The logger with the name specified.</returns>
 		public static ILog GetLogger(Type type) 
 		{
-			return GetLogger(Assembly.GetCallingAssembly(), type.FullName);
+            return GetLogger(Assembly.GetCallingAssembly(), TypeToLoggerNameConverter.GetLoggerName(type));
 		}
 
 		/// <summary>

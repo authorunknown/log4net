@@ -736,6 +736,7 @@
     <Compile Include="Util\TypeConverters\TypeConverterAttribute.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Util\TypeToLoggerNameConverter.cs" />
     <Compile Include="Util\WindowsSecurityContext.cs">
       <SubType>Code</SubType>
     </Compile>
