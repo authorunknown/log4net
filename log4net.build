@@ -208,19 +208,19 @@ limitations under the License.
   <!-- Target for compiling all build configurations for all runtime configurations -->
   <target name="compile-all" description="Compile all build configurations for all runtime configurations">
     <echo message="Compiling all build configurations for all runtime configurations." />
-    <call target="set-debug-build-configuration" />
+    <call target="debug" />
     <call target="compile-build" />
-    <call target="set-release-build-configuration" />
+    <call target="release" />
     <call target="compile-build" />
   </target>
   <!-- Target for compiling all build configurations for the current runtime configurations -->
   <target name="compile-runtime" description="Compile all build configurations for the current target framework">
     <echo message="Compiling all build configurations for ${framework::get-description(framework::get-target-framework())}." />
-    <call target="set-debug-build-configuration" />
+    <call target="debug" />
     <!-- make sure that the runtime properties that rely on build configuration information are refreshed -->
     <call target="set-runtime-configuration" />
     <call target="compile-${framework::get-target-framework()}" />
-    <call target="set-release-build-configuration" />
+    <call target="release" />
     <!-- make sure that the runtime properties that rely on build configuration information are refreshed -->
     <call target="set-runtime-configuration" />
     <call target="compile-${framework::get-target-framework()}" />
@@ -355,7 +355,7 @@ limitations under the License.
   <target name="compile" description="Builds the current build configuration for the current target framework." depends="check-current-build-config">
     <call target="compile-${framework::get-target-framework()}" />
   </target>
-  <target name="compile-netcf-1.0" description="Builds .NET Compact Framework 1.0 version" depends="set-netcf-1.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir">
+  <target name="compile-netcf-1.0" description="Builds .NET Compact Framework 1.0 version" depends="set-netcf-1.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir, version-assembly">
     <!-- initialize the temp.build.skip property to false -->
     <property name="temp.build.skip" value="false" />
     <if test="${current.build.config.release}">
@@ -396,7 +396,7 @@ limitations under the License.
       </csc>
     </if>
   </target>
-  <target name="compile-netcf-2.0" description="Builds .NET Compact Framework 2.0 version" depends="set-netcf-2.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir">
+  <target name="compile-netcf-2.0" description="Builds .NET Compact Framework 2.0 version" depends="set-netcf-2.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir, version-assembly">
     <!-- initialize the temp.build.skip property to false -->
     <property name="temp.build.skip" value="false" />
     <if test="${current.build.config.release}">
@@ -454,7 +454,7 @@ limitations under the License.
       </csc>
     </if>
   </target>
-  <target name="compile-net-1.0" description="Builds .NET Framework 1.0 version" depends="set-net-1.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir">
+  <target name="compile-net-1.0" description="Builds .NET Framework 1.0 version" depends="set-net-1.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir, version-assembly">
     <!-- initialize the temp.build.skip property to false -->
     <property name="temp.build.skip" value="false" />
     <if test="${current.build.config.release}">
@@ -496,7 +496,7 @@ limitations under the License.
       </csc>
     </if>
   </target>
-  <target name="compile-net-1.1" description="Builds .NET Framework 1.1 version" depends="set-net-1.1-runtime-configuration, check-log4net-basedir, clean-current-bin-dir">
+  <target name="compile-net-1.1" description="Builds .NET Framework 1.1 version" depends="set-net-1.1-runtime-configuration, check-log4net-basedir, clean-current-bin-dir, version-assembly">
     <!-- initialize the temp.build.skip property to false -->
     <property name="temp.build.skip" value="false" />
     <if test="${current.build.config.release}">
@@ -538,7 +538,7 @@ limitations under the License.
       </csc>
     </if>
   </target>
-  <target name="compile-net-2.0" description="Builds .NET Framework 2.0 version" depends="set-net-2.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir">
+  <target name="compile-net-2.0" description="Builds .NET Framework 2.0 version" depends="set-net-2.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir, version-assembly">
     <!-- initialize the temp.build.skip property to false -->
     <property name="temp.build.skip" value="false" />
     <if test="${current.build.config.release}">
@@ -604,7 +604,7 @@ limitations under the License.
       </csc>
     </if>
   </target>
-  <target name="compile-net-3.0" description="Builds .NET Framework 3.0 version" depends="set-net-3.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir">
+  <target name="compile-net-3.0" description="Builds .NET Framework 3.0 version" depends="set-net-3.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir, version-assembly">
     <!-- initialize the temp.build.skip property to false -->
     <property name="temp.build.skip" value="false" />
     <if test="${current.build.config.release}">
@@ -670,7 +670,7 @@ limitations under the License.
       </csc>
     </if>
   </target>
-  <target name="compile-net-3.5" description="Builds .NET Framework 3.5 version" depends="set-net-3.5-runtime-configuration, check-log4net-basedir, clean-current-bin-dir">
+  <target name="compile-net-3.5" description="Builds .NET Framework 3.5 version" depends="set-net-3.5-runtime-configuration, check-log4net-basedir, clean-current-bin-dir, version-assembly">
     <!-- initialize the temp.build.skip property to false -->
     <property name="temp.build.skip" value="false" />
     <if test="${current.build.config.release}">
@@ -736,7 +736,7 @@ limitations under the License.
       </csc>
     </if>
   </target>
-  <target name="compile-net-4.0" description="Builds .NET Framework 4.0 version" depends="set-net-4.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir">
+  <target name="compile-net-4.0" description="Builds .NET Framework 4.0 version" depends="set-net-4.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir, version-assembly">
     <!-- initialize the temp.build.skip property to false -->
     <property name="temp.build.skip" value="false" />
     <if test="${current.build.config.release}">
@@ -788,7 +788,7 @@ limitations under the License.
       </csc>
     </if>
   </target>
-  <target name="compile-mono-1.0" description="Builds Mono 1.0 version" depends="set-mono-1.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir">
+  <target name="compile-mono-1.0" description="Builds Mono 1.0 version" depends="set-mono-1.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir, version-assembly">
     <!-- initialize the temp.build.skip property to false -->
     <property name="temp.build.skip" value="false" />
     <if test="${current.build.config.release}">
@@ -854,7 +854,7 @@ limitations under the License.
       </csc>
     </if>
   </target>
-  <target name="compile-mono-2.0" description="Builds Mono 2.0 version" depends="set-mono-2.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir">
+  <target name="compile-mono-2.0" description="Builds Mono 2.0 version" depends="set-mono-2.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir, version-assembly">
     <!-- initialize the temp.build.skip property to false -->
     <property name="temp.build.skip" value="false" />
     <if test="${current.build.config.release}">
@@ -920,7 +920,7 @@ limitations under the License.
       </csc>
     </if>
   </target>
-  <target name="compile-sscli-1.0" description="Builds SSCLI 1.0 version" depends="set-sscli-1.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir">
+  <target name="compile-sscli-1.0" description="Builds SSCLI 1.0 version" depends="set-sscli-1.0-runtime-configuration, check-log4net-basedir, clean-current-bin-dir, version-assembly">
     <!-- initialize the temp.build.skip property to false -->
     <property name="temp.build.skip" value="false" />
     <if test="${current.build.config.release}">
@@ -973,7 +973,7 @@ limitations under the License.
         debugging information is not standardized and would be too closely tied to
         a specific implementation.
     -->
-  <target name="compile-cli-1.0" description="Builds CLI 1.0 version" depends="set-cli-1.0-configuration, check-log4net-basedir, clean-current-bin-dir" if="${current.build.config.release}">
+  <target name="compile-cli-1.0" description="Builds CLI 1.0 version" depends="set-cli-1.0-configuration, check-log4net-basedir, clean-current-bin-dir, version-assembly" if="${current.build.config.release}">
     <delete>
       <fileset basedir="${current.bin.dir}">
         <include name="log4net.*" />
@@ -1119,7 +1119,7 @@ limitations under the License.
     <!-- compile all extensions -->
     <call target="compile-extensions" />
     <!-- generate the sdk docs using the release build configuration for all runtime configuration -->
-    <call target="set-release-build-configuration" />
+    <call target="release" />
     <call target="generate-sdkdoc-all" />
     <!-- create the package distribution zipfile -->
     <call target="create-package-zipfile" />
@@ -1342,6 +1342,22 @@ limitations under the License.
     <exec program="svn" workingdir="${deploy.dir}" failonerror="true">
       <arg value="commit"/>
     </exec>
+  </target>
+
+  <target name="version-assembly" description="re-generate CommonAssemblyInfo.cs which lists version and release / debug assembly attributes">
+    <echo message="version ${version.number}"/>
+    <asminfo output="${project::get-base-directory()}\src\AssemblyVersionInfo.cs" language="CSharp">
+      <imports>
+        <import namespace="System.Reflection"/>
+      </imports>
+      <attributes>
+        <attribute type="AssemblyVersionAttribute" value="${version.number}"/>
+        <attribute type="AssemblyInformationalVersionAttribute" value="${version.major}.${version.minor}"/>
+        <attribute type="AssemblyFileVersionAttribute"
+                   value="${version.number}"
+                   unless="${nant.settings.currentframework == 'sscli-1.0' or nant.settings.currentframework == 'netcf-1.0'}"/>
+      </attributes>
+    </asminfo>
   </target>
 
 </project>

@@ -17,10 +17,20 @@ limitations under the License.
 -->
 <project name="log4net-helpers" xmlns="http://nant.sf.net/schemas/nant.xsd">
   <!-- The path to the log4net output directory for current build/runtime -->
-  <property
-      name="log4net.output.dir"
-      value="${log4net.basedir}/bin/${framework::get-family(framework::get-target-framework())}/${framework::get-version(framework::get-target-framework())}/${current.build.config}"
-      dynamic="true" />
+  <property name="log4net.output.dir"
+            value="${log4net.basedir}/bin/${framework::get-family(framework::get-target-framework())}/${framework::get-version(framework::get-target-framework())}/${current.build.config}"
+            dynamic="true" />
+
+  <property name="temp.now" value="${datetime::now()}"/>
+  <property name="version.major" value="1"/>
+  <property name="version.minor" value="2"/>
+  <property name="version.revision" value="${datetime::get-year(temp.now) - 2000}${datetime::get-day-of-year(temp.now)}"/>
+  <property name="version.build" value="${datetime::get-hour(temp.now) + 1}${datetime::get-minute(temp.now)}"/>
+  <property name="version.number"
+            value="${version.major}.${version.minor}.${version.revision}.${version.build}"
+            unless="${property::exists('version.number') and version.number != ''}"
+            dynamic="true"/>
+
   <target name="check-bin-dir">
     <if test="${not property::exists('bin.dir')}">
       <property name="bin.dir" value="bin" />
@@ -152,12 +162,12 @@ limitations under the License.
   </target>
   <!-- Targets for setting up the environment -->
   <target name="set-build-configuration" depends="check-current-build-config">
-    <if test="${not target::exists('set-' + current.build.config + '-build-configuration')}">
+    <if test="${not target::exists(current.build.config)}">
       <fail message="The ${current.build.config} build configuration is not supported by log4net." />
     </if>
-    <call target="set-${current.build.config}-build-configuration" />
+    <call target="${current.build.config}" />
   </target>
-  <target name="set-debug-build-configuration">
+  <target name="debug">
     <property name="build.debug" value="true" />
     <property name="build.defines.csc" value="DEBUG,TRACE" />
     <property name="build.defines.jsc" value="DEBUG,TRACE" />
@@ -168,7 +178,7 @@ limitations under the License.
     <property name="current.build.config" value="debug" />
     <call target="set-build-configuration-flags" />
   </target>
-  <target name="set-release-build-configuration">
+  <target name="release">
     <property name="build.debug" value="false" />
     <property name="build.defines.csc" value="TRACE,STRONG" />
     <property name="build.defines.jsc" value="TRACE,STRONG" />
