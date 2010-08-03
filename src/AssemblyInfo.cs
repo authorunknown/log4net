@@ -20,6 +20,10 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
+[assembly: System.Reflection.AssemblyCompany("The Apache Software Foundation")]
+[assembly: System.Reflection.AssemblyCopyright("Copyright 2001-2007 The Apache Software Foundation.")]
+[assembly: System.Reflection.AssemblyTrademark("Copyright 2001-2007 The Apache Software Foundation.")]
+
 #if (!SSCLI)
 //
 // log4net makes use of static methods which cannot be made com visible
